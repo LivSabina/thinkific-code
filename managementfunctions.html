@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Five Management Functions — Elevate & Educate Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --teal:        #2BBFB0;
+    --teal-dark:   #1A9E91;
+    --teal-light:  #E8F9F7;
+    --teal-mid:    #B2EAE5;
+    --navy:        #2D4A7A;
+    --navy-dark:   #1E3356;
+    --navy-light:  #EBF0F9;
+    --navy-mid:    #BFD0EC;
+    --planning-c:   #F4A836; --planning-bg:  #FEF6E8; --planning-bd:  #F9D8A0;
+    --organizing-c: #4A90D9; --organizing-bg:#EBF4FD; --organizing-bd:#B3D4F4;
+    --staffing-c:   #2BBFB0; --staffing-bg:  #E8F9F7; --staffing-bd:  #A0E2DC;
+    --directing-c:  #A067D9; --directing-bg: #F3ECFD; --directing-bd: #D4BAF4;
+    --controlling-c:#3BAD72; --controlling-bg:#E8F7EE; --controlling-bd:#A8DFC0;
+    --exam-c:       #2D4A7A; --exam-bg:      #EBF0F9; --exam-bd:      #BFD0EC;
+    --test-c:       #E05C8A; --test-bg:      #FDE8F1; --test-bd:      #F4B8D0;
+    --white: #FFFFFF; --bg: #F4F7FB; --text: #1E3356; --text-secondary: #5A7298;
+    --border: #E2EAF4; --card-radius: 18px;
+    --shadow: 0 2px 20px rgba(45,74,122,0.08);
+    --shadow-hover: 0 8px 32px rgba(45,74,122,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #3B6AB0 100%); padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 50%, rgba(43,191,176,0.18) 0%, transparent 45%), radial-gradient(circle at 85% 30%, rgba(43,191,176,0.12) 0%, transparent 45%); pointer-events: none; }
+  .hero::after { content: '✦ ✦'; position: absolute; top: 24px; right: 32px; font-size: 18px; color: var(--teal); opacity: 0.5; letter-spacing: 10px; }
+  .hero-brand { display: inline-flex; align-items: center; gap: 8px; background: rgba(43,191,176,0.15); border: 1px solid rgba(43,191,176,0.3); border-radius: 50px; padding: 5px 16px 5px 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--teal-mid); margin-bottom: 20px; position: relative; }
+  .hero-brand-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5.5vw, 48px); font-weight: 900; line-height: 1.15; color: #fff; margin-bottom: 12px; position: relative; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 32px; line-height: 1.65; position: relative; }
+
+  /* NAV PILLS */
+  .progress-nav { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 0 16px; position: relative; }
+  .nav-pill { border: 1.5px solid transparent; border-radius: 50px; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+  .nav-pill:hover { color: #fff; background: rgba(255,255,255,0.18); }
+  .nav-pill.active { background: #fff; color: var(--navy); border-color: transparent; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+  .nav-pill .pill-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; margin-bottom: 1px; }
+
+  /* MAIN */
+  .main { max-width: 840px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* TOP NAV BAR — always visible */
+  .top-nav-bar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 8px;
+    z-index: 100;
+  }
+  .top-nav-left { display: flex; align-items: center; gap: 10px; }
+  .top-nav-section { font-size: 13px; font-weight: 600; color: var(--text); }
+  .top-nav-sub { font-size: 12px; color: var(--text-secondary); }
+  .top-nav-right { display: flex; gap: 8px; }
+  .tnav-btn { border: none; border-radius: 50px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.18s; }
+  .tnav-btn.prev { background: var(--bg); color: var(--text-secondary); border: 1.5px solid var(--border); }
+  .tnav-btn.prev:hover { background: var(--navy-light); }
+  .tnav-btn.next { color: #fff; box-shadow: 0 3px 12px rgba(45,74,122,0.2); }
+  .tnav-btn.next:hover { transform: translateY(-1px); box-shadow: 0 5px 20px rgba(45,74,122,0.28); }
+  .tnav-btn:disabled { opacity: 0.3; pointer-events: none; }
+
+  /* Progress */
+  .overall-progress { background: var(--white); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow); }
+  .progress-bar-wrap { flex: 1; }
+  .progress-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--navy)); transition: width 0.4s ease; }
+  .progress-label { font-size: 12px; color: var(--text-secondary); margin-top: 5px; }
+  .progress-pct { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+  /* PANELS */
+  .section-panel { display: none; animation: fadeUp 0.3s ease forwards; }
+  .section-panel.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Function header */
+  .fn-header { border-radius: var(--card-radius); padding: 32px 28px 26px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow); }
+  .fn-header-sparkle { position: absolute; right: 24px; top: 20px; font-size: 32px; opacity: 0.2; line-height: 1; }
+  .fn-header-emoji { position: absolute; right: 24px; bottom: 20px; font-size: 64px; opacity: 0.12; line-height: 1; }
+  .fn-number { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.6; }
+  .fn-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 40px); font-weight: 900; line-height: 1.1; margin-bottom: 6px; }
+  .fn-question { font-size: 15px; font-weight: 500; font-style: italic; opacity: 0.7; margin-bottom: 12px; }
+  .fn-desc { font-size: 14px; line-height: 1.7; opacity: 0.85; max-width: 560px; }
+
+  /* CARDS */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  @media(max-width:560px){ .cards-grid { grid-template-columns: 1fr; } }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 20px; box-shadow: var(--shadow); }
+  .info-card h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; }
+  .info-card ul { list-style: none; padding: 0; }
+  .info-card ul li { font-size: 13.5px; line-height: 1.5; padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; color: var(--text); }
+  .info-card ul li:last-child { border-bottom: none; }
+  .info-card ul li::before { content: '›'; font-weight: 700; flex-shrink: 0; margin-top: 1px; color: var(--teal); }
+
+  /* Memory trick */
+  .memory-trick { border-radius: var(--card-radius); padding: 20px 22px; margin-bottom: 20px; display: flex; gap: 14px; align-items: flex-start; box-shadow: var(--shadow); }
+  .trick-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+  .trick-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; color: var(--text-secondary); }
+  .trick-text { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 5px; color: var(--navy); }
+  .trick-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* Examples */
+  .examples-section { margin-bottom: 20px; }
+  .examples-section h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 10px; }
+  .example-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .example-pill { background: var(--white); border: 1px solid var(--border); border-radius: 50px; padding: 7px 14px; font-size: 13px; font-weight: 500; color: var(--text); box-shadow: var(--shadow); }
+
+  /* EXAM DECODER */
+  .exam-header { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); border-radius: var(--card-radius); padding: 30px 28px; margin-bottom: 20px; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-hover); }
+  .exam-header::before { content: '✦'; position: absolute; top: 16px; right: 24px; font-size: 20px; color: var(--teal); opacity: 0.4; }
+  .exam-header::after { content: '✦'; position: absolute; bottom: 16px; left: 24px; font-size: 14px; color: var(--teal); opacity: 0.3; }
+  .exam-header h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .exam-header p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .decode-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--card-radius); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .decode-table thead tr { background: var(--navy-light); }
+  .decode-table th { padding: 12px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; color: var(--text-secondary); }
+  .decode-table td { padding: 13px 16px; font-size: 13.5px; line-height: 1.5; border-bottom: 1px solid var(--border); color: var(--text); }
+  .decode-table tr:last-child td { border-bottom: none; }
+  .decode-table tr:nth-child(even) td { background: var(--bg); }
+  .fn-tag { display: inline-block; border-radius: 20px; padding: 3px 12px; font-size: 12px; font-weight: 700; color: #fff; }
+
+  /* KNOWLEDGE TEST */
+  .test-header { border-radius: var(--card-radius); padding: 32px 28px; margin-bottom: 24px; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-hover); }
+  .test-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+  .test-header p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+  .test-score-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 20px 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow); }
+  .score-display { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); white-space: nowrap; }
+  .score-label { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .score-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal), var(--navy)); transition: width 0.6s ease; width: 0%; }
+
+  /* Quiz styles */
+  .quiz-block { background: var(--white); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 22px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .quiz-num { display: inline-block; background: var(--navy); color: #fff; border-radius: 50%; width: 26px; height: 26px; font-size: 12px; font-weight: 700; text-align: center; line-height: 26px; margin-bottom: 10px; }
+  .quiz-block h4 { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.6; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt { background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 11px 16px; font-size: 13.5px; cursor: pointer; text-align: left; color: var(--text); font-family: 'DM Sans', sans-serif; transition: all 0.18s; font-weight: 500; }
+  .quiz-opt:hover:not(:disabled) { background: var(--navy-light); border-color: var(--navy-mid); }
+  .quiz-opt.correct { background: var(--controlling-bg); border-color: var(--controlling-c); color: #1A6B3C; }
+  .quiz-opt.wrong { background: #FEF0F0; border-color: #F4AAAA; color: #B02020; }
+  .quiz-feedback { margin-top: 10px; font-size: 13px; line-height: 1.55; padding: 10px 14px; border-radius: 10px; display: none; font-weight: 500; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--controlling-bg); color: #1A6B3C; border: 1px solid var(--controlling-bd); }
+  .quiz-feedback.wrong { background: #FEF0F0; color: #B02020; border: 1px solid #F4AAAA; }
+
+  .reset-btn { display: block; margin: 0 auto; border: none; border-radius: 50px; padding: 13px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, var(--teal), var(--navy)); color: #fff; box-shadow: 0 4px 16px rgba(45,74,122,0.2); transition: all 0.18s; }
+  .reset-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(45,74,122,0.28); }
+
+  /* Completion banner */
+  .completion-banner { display: none; background: linear-gradient(135deg, var(--teal-light), var(--navy-light)); border: 1.5px solid var(--teal-mid); border-radius: var(--card-radius); padding: 24px; text-align: center; margin-bottom: 20px; }
+  .completion-banner.show { display: block; }
+  .completion-banner h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .completion-banner p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-brand">
+    <div class="hero-brand-dot"></div>
+    Elevate &amp; Educate Academy · RD Exam Prep
+  </div>
+  <h1>The Five<br><em>Management Functions</em></h1>
+  <p class="hero-sub">Everything you need to master Domain 3 and confidently answer every management scenario on exam day.</p>
+  <div class="progress-nav">
+    <button class="nav-pill active" onclick="show('planning')"><span class="pill-dot" style="background:#F4A836"></span>Planning</button>
+    <button class="nav-pill" onclick="show('organizing')"><span class="pill-dot" style="background:#4A90D9"></span>Organizing</button>
+    <button class="nav-pill" onclick="show('staffing')"><span class="pill-dot" style="background:#2BBFB0"></span>Staffing</button>
+    <button class="nav-pill" onclick="show('directing')"><span class="pill-dot" style="background:#A067D9"></span>Directing</button>
+    <button class="nav-pill" onclick="show('controlling')"><span class="pill-dot" style="background:#3BAD72"></span>Controlling</button>
+    <button class="nav-pill" onclick="show('exam')"><span class="pill-dot" style="background:#2D4A7A"></span>Exam Decoder</button>
+    <button class="nav-pill" onclick="show('test')"><span class="pill-dot" style="background:#E05C8A"></span>Knowledge Test</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- STICKY TOP NAV -->
+  <div class="top-nav-bar" id="top-nav">
+    <div class="top-nav-left">
+      <div>
+        <div class="top-nav-section" id="tnav-section">📋 Planning</div>
+        <div class="top-nav-sub" id="tnav-sub">Section 1 of 7</div>
+      </div>
+    </div>
+    <div class="top-nav-right">
+      <button class="tnav-btn prev" id="tnav-prev" onclick="navStep(-1)" disabled>← Back</button>
+      <button class="tnav-btn next" id="tnav-next" onclick="navStep(1)" style="background:linear-gradient(135deg,#4A90D9,#3370B0)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="overall-progress">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="prog-fill" style="width:14%"></div></div>
+      <div class="progress-label" id="prog-label">Section 1 of 7</div>
+    </div>
+    <div class="progress-pct" id="prog-pct">14%</div>
+  </div>
+
+  <!-- ======== PLANNING ======== -->
+  <div class="section-panel active" id="panel-planning">
+    <div class="fn-header" style="background:linear-gradient(135deg,var(--planning-bg),#FDE8BB);color:var(--navy);">
+      <div class="fn-header-sparkle">✦</div>
+      <div class="fn-header-emoji">📋</div>
+      <div class="fn-number" style="color:var(--planning-c)">Function 01 of 05</div>
+      <div class="fn-title">Planning</div>
+      <div class="fn-question">"What needs to be done?"</div>
+      <div class="fn-desc">Planning is the first, continuous, and most heavily tested management function. Every other function depends on it.</div>
+    </div>
+    <div class="memory-trick" style="background:var(--planning-bg);border:1.5px solid var(--planning-bd);">
+      <div class="trick-icon">🔑</div>
+      <div>
+        <div class="trick-label">Exam Memory Trick</div>
+        <div class="trick-text" style="color:var(--planning-c)">Planning = Predicting</div>
+        <div class="trick-sub">If the question involves deciding, forecasting, setting goals, or creating policies, it belongs to Planning.</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3>What Planning Includes</h3>
+        <ul>
+          <li>Setting goals, objectives, mission, and vision</li>
+          <li>Forecasting (labor, budget, meals, FTEs)</li>
+          <li>Policies, procedures, and rules</li>
+          <li>Strategic, tactical, and operational planning</li>
+          <li>SWOT analysis</li>
+          <li>Project planning: Gantt, PERT, CPM</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Planning Types</h3>
+        <ul>
+          <li><strong style="color:var(--planning-c)">Strategic:</strong> 3 to 5+ years, organization-wide goals</li>
+          <li><strong style="color:var(--planning-c)">Tactical:</strong> Department level, bridges strategic to operational</li>
+          <li><strong style="color:var(--planning-c)">Operational:</strong> Day-to-day tasks and timelines</li>
+          <li><strong style="color:var(--planning-c)">Contingency:</strong> Backup plans when primary strategies fail</li>
+        </ul>
+      </div>
+    </div>
+    <div class="examples-section">
+      <h3>High-Yield Exam Examples</h3>
+      <div class="example-pills">
+        <span class="example-pill">Determining FTEs needed next quarter</span>
+        <span class="example-pill">Writing a tray accuracy policy</span>
+        <span class="example-pill">Creating a 5-year strategic plan</span>
+        <span class="example-pill">Scheduling equipment replacement</span>
+        <span class="example-pill">Conducting a SWOT analysis</span>
+        <span class="example-pill">Forecasting meal production</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== ORGANIZING ======== -->
+  <div class="section-panel" id="panel-organizing">
+    <div class="fn-header" style="background:linear-gradient(135deg,var(--organizing-bg),#D0E8FA);color:var(--navy);">
+      <div class="fn-header-sparkle" style="color:var(--organizing-c)">✦</div>
+      <div class="fn-header-emoji">🗂</div>
+      <div class="fn-number" style="color:var(--organizing-c)">Function 02 of 05</div>
+      <div class="fn-title">Organizing</div>
+      <div class="fn-question">"How will we arrange the work?"</div>
+      <div class="fn-desc">Organizing structures people, resources, and authority so the plan can actually happen.</div>
+    </div>
+    <div class="memory-trick" style="background:var(--organizing-bg);border:1.5px solid var(--organizing-bd);">
+      <div class="trick-icon">🔑</div>
+      <div>
+        <div class="trick-label">Exam Memory Trick</div>
+        <div class="trick-text" style="color:var(--organizing-c)">Organizing = Structure</div>
+        <div class="trick-sub">If the question involves who reports to whom, workflow design, or arranging resources, it is Organizing.</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3>What Organizing Includes</h3>
+        <ul>
+          <li>Organizational charts</li>
+          <li>Lines of authority (line, staff, functional)</li>
+          <li>Delegation of tasks and authority</li>
+          <li>Work schedules and workflow design</li>
+          <li>Equipment and space layout</li>
+          <li>Job descriptions and job specifications</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Key Distinctions to Know</h3>
+        <ul>
+          <li><strong style="color:var(--organizing-c)">Delegation</strong> transfers BOTH responsibility and authority</li>
+          <li><strong style="color:var(--organizing-c)">Unity of command:</strong> one employee, one supervisor</li>
+          <li><strong style="color:var(--organizing-c)">Span of control:</strong> number of direct reports one manager supervises</li>
+          <li><strong style="color:var(--organizing-c)">Job description:</strong> what you do</li>
+          <li><strong style="color:var(--organizing-c)">Job specification:</strong> what qualifications you need</li>
+        </ul>
+      </div>
+    </div>
+    <div class="examples-section">
+      <h3>High-Yield Exam Examples</h3>
+      <div class="example-pills">
+        <span class="example-pill">Creating a production schedule</span>
+        <span class="example-pill">Designing a trayline layout</span>
+        <span class="example-pill">Assigning tasks to employees</span>
+        <span class="example-pill">Clarifying reporting relationships</span>
+        <span class="example-pill">Drawing an organizational chart</span>
+        <span class="example-pill">Delegating ordering authority</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== STAFFING ======== -->
+  <div class="section-panel" id="panel-staffing">
+    <div class="fn-header" style="background:linear-gradient(135deg,var(--staffing-bg),#C8F0EC);color:var(--navy);">
+      <div class="fn-header-sparkle" style="color:var(--teal)">✦</div>
+      <div class="fn-header-emoji">👥</div>
+      <div class="fn-number" style="color:var(--teal-dark)">Function 03 of 05</div>
+      <div class="fn-title">Staffing</div>
+      <div class="fn-question">"Who will do the work?"</div>
+      <div class="fn-desc">Staffing covers the entire employee lifecycle from the first job posting all the way through separation.</div>
+    </div>
+    <div class="memory-trick" style="background:var(--staffing-bg);border:1.5px solid var(--staffing-bd);">
+      <div class="trick-icon">🔑</div>
+      <div>
+        <div class="trick-label">Exam Memory Trick</div>
+        <div class="trick-text" style="color:var(--teal-dark)">Staffing = People</div>
+        <div class="trick-sub">If the question involves hiring, training, evaluating, scheduling, or labor law, it is Staffing.</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3>What Staffing Includes</h3>
+        <ul>
+          <li>Recruitment and hiring</li>
+          <li>Orientation and onboarding</li>
+          <li>Scheduling (master, shift, production)</li>
+          <li>Performance evaluations</li>
+          <li>Competency checks and training</li>
+          <li>Retention strategies</li>
+          <li>Labor laws (FLSA, ADA, EEOC)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Progressive Discipline Order</h3>
+        <ul>
+          <li><strong style="color:var(--teal-dark)">Step 1:</strong> Verbal warning</li>
+          <li><strong style="color:var(--teal-dark)">Step 2:</strong> Written warning</li>
+          <li><strong style="color:var(--teal-dark)">Step 3:</strong> Suspension</li>
+          <li><strong style="color:var(--teal-dark)">Step 4:</strong> Termination</li>
+        </ul>
+        <div style="margin-top:12px;padding:10px 12px;background:var(--teal-light);border-radius:10px;font-size:13px;color:var(--teal-dark);font-weight:600;">
+          FTE = Total paid hours ÷ 40 hrs/week
+        </div>
+      </div>
+    </div>
+    <div class="examples-section">
+      <h3>High-Yield Exam Examples</h3>
+      <div class="example-pills">
+        <span class="example-pill">Interviewing a new cook</span>
+        <span class="example-pill">Completing a performance appraisal</span>
+        <span class="example-pill">Scheduling staff for holidays</span>
+        <span class="example-pill">Ensuring compliance with labor laws</span>
+        <span class="example-pill">Calculating FTEs needed</span>
+        <span class="example-pill">Conducting new employee orientation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== DIRECTING ======== -->
+  <div class="section-panel" id="panel-directing">
+    <div class="fn-header" style="background:linear-gradient(135deg,var(--directing-bg),#E8D8FA);color:var(--navy);">
+      <div class="fn-header-sparkle" style="color:var(--directing-c)">✦</div>
+      <div class="fn-header-emoji">🧭</div>
+      <div class="fn-number" style="color:var(--directing-c)">Function 04 of 05</div>
+      <div class="fn-title">Directing</div>
+      <div class="fn-question">"Let's get the work done."</div>
+      <div class="fn-desc">Directing is the most human and interpersonal of the five functions. It is where plans are actually executed through daily leadership, motivation, and communication.</div>
+    </div>
+    <div class="memory-trick" style="background:var(--directing-bg);border:1.5px solid var(--directing-bd);">
+      <div class="trick-icon">🔑</div>
+      <div>
+        <div class="trick-label">Exam Memory Trick</div>
+        <div class="trick-text" style="color:var(--directing-c)">Directing = Daily Leadership</div>
+        <div class="trick-sub">If the question involves motivating, leading, communicating, or resolving conflict, it is Directing.</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3>What Directing Includes</h3>
+        <ul>
+          <li>Communication (formal and informal)</li>
+          <li>Motivation theories (Maslow, Herzberg)</li>
+          <li>Leadership styles (autocratic, democratic, laissez-faire)</li>
+          <li>Conflict resolution</li>
+          <li>Supervision and coaching</li>
+          <li>Soft skills and emotional intelligence</li>
+          <li>Change management</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Herzberg: The Big Exam Trap</h3>
+        <ul>
+          <li><strong style="color:var(--directing-c)">Hygiene factors</strong> (pay, conditions, supervision) only PREVENT dissatisfaction</li>
+          <li><strong style="color:var(--directing-c)">Motivators</strong> (achievement, recognition, growth) actually DRIVE satisfaction</li>
+          <li>Pay alone does NOT motivate. This is the most tested trap on the exam.</li>
+          <li>Maslow: address the LOWEST unmet need first</li>
+        </ul>
+      </div>
+    </div>
+    <div class="examples-section">
+      <h3>High-Yield Exam Examples</h3>
+      <div class="example-pills">
+        <span class="example-pill">Coaching an employee on portioning</span>
+        <span class="example-pill">Mediating a conflict between staff</span>
+        <span class="example-pill">Motivating employees during a busy service</span>
+        <span class="example-pill">Choosing a leadership style for a situation</span>
+        <span class="example-pill">Using active listening with a struggling employee</span>
+        <span class="example-pill">Applying Theory Y management</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== CONTROLLING ======== -->
+  <div class="section-panel" id="panel-controlling">
+    <div class="fn-header" style="background:linear-gradient(135deg,var(--controlling-bg),#C4EDD6);color:var(--navy);">
+      <div class="fn-header-sparkle" style="color:var(--controlling-c)">✦</div>
+      <div class="fn-header-emoji">📊</div>
+      <div class="fn-number" style="color:var(--controlling-c)">Function 05 of 05</div>
+      <div class="fn-title">Controlling</div>
+      <div class="fn-question">"Did we meet the goal?"</div>
+      <div class="fn-desc">Controlling evaluates performance and ensures standards are met. It loops right back to Planning, making the management cycle continuous.</div>
+    </div>
+    <div class="memory-trick" style="background:var(--controlling-bg);border:1.5px solid var(--controlling-bd);">
+      <div class="trick-icon">🔑</div>
+      <div>
+        <div class="trick-label">Exam Memory Trick</div>
+        <div class="trick-text" style="color:var(--controlling-c)">Controlling = Checking</div>
+        <div class="trick-sub">If the question involves monitoring, evaluating, auditing, or correcting, it is Controlling.</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3>The 4 Steps to Controlling</h3>
+        <ul>
+          <li><strong style="color:var(--controlling-c)">Step 1:</strong> Establish standards</li>
+          <li><strong style="color:var(--controlling-c)">Step 2:</strong> Measure performance</li>
+          <li><strong style="color:var(--controlling-c)">Step 3:</strong> Compare to standards</li>
+          <li><strong style="color:var(--controlling-c)">Step 4:</strong> Take corrective action</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>TAFOE: 5 Characteristics</h3>
+        <ul>
+          <li><strong style="color:var(--controlling-c)">T</strong>imely: fast enough to act on</li>
+          <li><strong style="color:var(--controlling-c)">A</strong>ccurate: reliable and precise data</li>
+          <li><strong style="color:var(--controlling-c)">F</strong>lexible: adapts when plans change</li>
+          <li><strong style="color:var(--controlling-c)">O</strong>bjective: free from personal bias</li>
+          <li><strong style="color:var(--controlling-c)">E</strong>conomical: cost must not exceed benefit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="examples-section">
+      <h3>High-Yield Exam Examples</h3>
+      <div class="example-pills">
+        <span class="example-pill">Conducting a tray accuracy audit</span>
+        <span class="example-pill">Reviewing budget variance reports</span>
+        <span class="example-pill">Monitoring plate waste</span>
+        <span class="example-pill">Implementing corrective action after low scores</span>
+        <span class="example-pill">Monitoring a critical control point (HACCP)</span>
+        <span class="example-pill">Benchmarking against peer institutions</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== EXAM DECODER ======== -->
+  <div class="section-panel" id="panel-exam">
+    <div class="exam-header">
+      <h2>🧠 Exam Decoder</h2>
+      <p>The RD exam loves scenario questions. Use this table to decode any management scenario in seconds.</p>
+    </div>
+    <table class="decode-table">
+      <thead>
+        <tr><th>If the manager is…</th><th>The function is…</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Setting goals, forecasting, writing policies, conducting SWOT</td><td><span class="fn-tag" style="background:var(--planning-c)">📋 Planning</span></td></tr>
+        <tr><td>Designing workflow, assigning roles, drawing org charts, delegating</td><td><span class="fn-tag" style="background:var(--organizing-c)">🗂 Organizing</span></td></tr>
+        <tr><td>Hiring, training, scheduling, evaluating performance, applying labor law</td><td><span class="fn-tag" style="background:var(--staffing-c)">👥 Staffing</span></td></tr>
+        <tr><td>Leading, motivating, communicating, resolving conflict, coaching</td><td><span class="fn-tag" style="background:var(--directing-c)">🧭 Directing</span></td></tr>
+        <tr><td>Auditing, comparing results to standards, evaluating, correcting deviations</td><td><span class="fn-tag" style="background:var(--controlling-c)">📊 Controlling</span></td></tr>
+      </tbody>
+    </table>
+    <div style="background:var(--navy-light);border:1px solid var(--navy-mid);border-radius:var(--card-radius);padding:20px 22px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;">Ready to test yourself?</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">You have reviewed all five functions. Head to the Knowledge Test to see how you score.</div>
+      <button onclick="show('test')" style="border:none;border-radius:50px;padding:11px 28px;background:linear-gradient(135deg,var(--test-c),#B03070);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(224,92,138,0.3);">Take the Knowledge Test ✦</button>
+    </div>
+  </div>
+
+  <!-- ======== KNOWLEDGE TEST ======== -->
+  <div class="section-panel" id="panel-test">
+    <div class="test-header" style="background:linear-gradient(135deg,var(--test-bg),#F8D0E4);color:var(--navy);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--test-c);margin-bottom:6px;">Final Section</div>
+      <h2>Knowledge Test</h2>
+      <p>8 scenario-based questions covering all five management functions. These are written in the style of real RD exam questions.</p>
+    </div>
+
+    <div class="test-score-box">
+      <div>
+        <div class="score-display" id="score-display">0 / 8</div>
+        <div class="score-label">Questions answered correctly.<br>Complete all 8 to see your final score.</div>
+      </div>
+      <div style="flex:1">
+        <div class="score-bar-track"><div class="score-bar-fill" id="score-bar"></div></div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:5px;" id="score-pct">0% correct so far</div>
+      </div>
+    </div>
+
+    <div class="completion-banner" id="completion-banner">
+      <h3 id="completion-title">🎉 Test Complete!</h3>
+      <p id="completion-msg">You answered all 8 questions.</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-block">
+      <div class="quiz-num">1</div>
+      <h4>A foodservice director sits down to project how many FTE staff will be needed for the new outpatient clinic opening in six months. Which management function is she performing?</h4>
+      <div class="quiz-options" id="t1-opts">
+        <button class="quiz-opt" onclick="testAnswer('t1',this,'wrong','Staffing covers actual recruiting and hiring. Forecasting future FTE needs happens during Planning.')">Staffing</button>
+        <button class="quiz-opt" onclick="testAnswer('t1',this,'correct','Correct! Forecasting staffing needs including FTE projections is a Planning activity.')">Planning</button>
+        <button class="quiz-opt" onclick="testAnswer('t1',this,'wrong','Controlling measures performance against standards. Projecting future needs is Planning.')">Controlling</button>
+        <button class="quiz-opt" onclick="testAnswer('t1',this,'wrong','Organizing arranges resources and structure. Projecting FTEs needed is Planning.')">Organizing</button>
+      </div>
+      <div class="quiz-feedback" id="t1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-block">
+      <div class="quiz-num">2</div>
+      <h4>A manager redesigns the cafeteria trayline so that hot foods, cold foods, and beverages each have a dedicated station with a clearly assigned employee. Which management function does this describe?</h4>
+      <div class="quiz-options" id="t2-opts">
+        <button class="quiz-opt" onclick="testAnswer('t2',this,'wrong','Planning sets goals and strategies. Designing a physical layout and assigning stations is Organizing.')">Planning</button>
+        <button class="quiz-opt" onclick="testAnswer('t2',this,'wrong','Directing involves daily leadership and motivation, not physical workflow design.')">Directing</button>
+        <button class="quiz-opt" onclick="testAnswer('t2',this,'correct','Correct! Designing workflow and arranging resources including layout and role assignments is Organizing.')">Organizing</button>
+        <button class="quiz-opt" onclick="testAnswer('t2',this,'wrong','Staffing is about people: hiring, training, and scheduling. This is about structure and layout.')">Staffing</button>
+      </div>
+      <div class="quiz-feedback" id="t2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-block">
+      <div class="quiz-num">3</div>
+      <h4>A department has 120 total paid labor hours to cover each week. How many FTEs does this represent?</h4>
+      <div class="quiz-options" id="t3-opts">
+        <button class="quiz-opt" onclick="testAnswer('t3',this,'wrong','Check the formula: FTE equals total paid hours divided by 40. 120 divided by 40 equals 3, not 4.')">4 FTEs</button>
+        <button class="quiz-opt" onclick="testAnswer('t3',this,'correct','Correct! 120 divided by 40 equals 3 FTEs. Always divide total paid hours by 40.')">3 FTEs</button>
+        <button class="quiz-opt" onclick="testAnswer('t3',this,'wrong','120 divided by 40 equals 3, not 2.')">2 FTEs</button>
+        <button class="quiz-opt" onclick="testAnswer('t3',this,'wrong','120 divided by 40 equals 3, not 5.')">5 FTEs</button>
+      </div>
+      <div class="quiz-feedback" id="t3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-block">
+      <div class="quiz-num">4</div>
+      <h4>A manager notices her team seems unmotivated and responds by giving everyone a pay raise. According to Herzberg's two-factor theory, what is the most likely outcome?</h4>
+      <div class="quiz-options" id="t4-opts">
+        <button class="quiz-opt" onclick="testAnswer('t4',this,'wrong','Pay is a hygiene factor. It can reduce dissatisfaction but it cannot create motivation.')">Employees will be highly motivated</button>
+        <button class="quiz-opt" onclick="testAnswer('t4',this,'correct','Correct! Pay is a hygiene factor. It prevents dissatisfaction but does not create motivation. The manager needs motivators like recognition or growth.')">Dissatisfaction will decrease but motivation will not increase</button>
+        <button class="quiz-opt" onclick="testAnswer('t4',this,'wrong','Hygiene factors like pay can remove dissatisfaction. The issue is they cannot create motivation.')">Nothing will change at all</button>
+        <button class="quiz-opt" onclick="testAnswer('t4',this,'wrong','Pay does not create motivation per Herzberg. Only motivators like achievement and recognition drive true satisfaction.')">Productivity will significantly improve</button>
+      </div>
+      <div class="quiz-feedback" id="t4-fb"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="quiz-block">
+      <div class="quiz-num">5</div>
+      <h4>A foodservice director reviews last month's food cost report and discovers it came in at 39%, above the 34% standard. She investigates, identifies over-portioning as the cause, and retrains the service staff. Which step of the Controlling function does the retraining represent?</h4>
+      <div class="quiz-options" id="t5-opts">
+        <button class="quiz-opt" onclick="testAnswer('t5',this,'wrong','Establishing standards happened earlier when the 34% target was set. Retraining is a response to a discovered deviation.')">Step 1: Establishing standards</button>
+        <button class="quiz-opt" onclick="testAnswer('t5',this,'wrong','Measuring performance is when she pulled and reviewed the report. Retraining comes after.')">Step 2: Measuring performance</button>
+        <button class="quiz-opt" onclick="testAnswer('t5',this,'wrong','Comparing to standards is when she identified the 5% variance. Retraining is the response that follows.')">Step 3: Comparing to standards</button>
+        <button class="quiz-opt" onclick="testAnswer('t5',this,'correct','Correct! Retraining staff in response to a discovered deviation is Step 4: Taking corrective action.')">Step 4: Taking corrective action</button>
+      </div>
+      <div class="quiz-feedback" id="t5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="quiz-block">
+      <div class="quiz-num">6</div>
+      <h4>The clinical nutrition manager notices that patient satisfaction scores for meal delivery have dropped to 72%, below the 85% target. She pulls the data, reviews tray ticket accuracy logs, and schedules a retraining session for the diet aides. Which management function is she performing?</h4>
+      <div class="quiz-options" id="t6-opts">
+        <button class="quiz-opt" onclick="testAnswer('t6',this,'wrong','Planning is forward-looking. This manager is reacting to a performance problem that already occurred.')">Planning</button>
+        <button class="quiz-opt" onclick="testAnswer('t6',this,'wrong','Staffing involves hiring, scheduling, and evaluating people. This is measuring performance against a standard and correcting it.')">Staffing</button>
+        <button class="quiz-opt" onclick="testAnswer('t6',this,'wrong','Directing is about daily leadership. This is a structured response to measured performance data.')">Directing</button>
+        <button class="quiz-opt" onclick="testAnswer('t6',this,'correct','Correct! She measured performance, compared it to a standard, identified a deviation, and took corrective action. That is all four steps of Controlling.')">Controlling</button>
+      </div>
+      <div class="quiz-feedback" id="t6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="quiz-block">
+      <div class="quiz-num">7</div>
+      <h4>During a busy lunch service, a new employee is struggling with portioning. The manager steps in beside her, demonstrates the correct technique, offers encouragement, and checks back in throughout the shift. Which management function does this best describe?</h4>
+      <div class="quiz-options" id="t7-opts">
+        <button class="quiz-opt" onclick="testAnswer('t7',this,'wrong','Staffing covers formal training and evaluation processes. This is real-time guidance and motivation during the workday.')">Staffing</button>
+        <button class="quiz-opt" onclick="testAnswer('t7',this,'correct','Correct! Coaching, encouraging, and providing real-time guidance during operations is Directing. It is the human and interpersonal function.')">Directing</button>
+        <button class="quiz-opt" onclick="testAnswer('t7',this,'wrong','Controlling measures outcomes against standards. This describes active leadership and coaching in the moment.')">Controlling</button>
+        <button class="quiz-opt" onclick="testAnswer('t7',this,'wrong','Organizing sets up structures before work begins. This is real-time interpersonal leadership.')">Organizing</button>
+      </div>
+      <div class="quiz-feedback" id="t7-fb"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="quiz-block">
+      <div class="quiz-num">8</div>
+      <h4>A new hospital is opening a foodservice department. The director maps out which employees will report to the executive chef and which will report to the clinical nutrition manager, then creates a written chart showing all these relationships. Which function is this?</h4>
+      <div class="quiz-options" id="t8-opts">
+        <button class="quiz-opt" onclick="testAnswer('t8',this,'wrong','Planning sets goals and strategies. Creating reporting structures and org charts is Organizing.')">Planning</button>
+        <button class="quiz-opt" onclick="testAnswer('t8',this,'correct','Correct! Building an organizational chart and establishing reporting relationships is a classic Organizing activity.')">Organizing</button>
+        <button class="quiz-opt" onclick="testAnswer('t8',this,'wrong','Staffing fills positions with people. Determining who reports to whom is Organizing.')">Staffing</button>
+        <button class="quiz-opt" onclick="testAnswer('t8',this,'wrong','Directing is about daily leadership and motivation, not establishing organizational structure.')">Directing</button>
+      </div>
+      <div class="quiz-feedback" id="t8-fb"></div>
+    </div>
+
+    <button class="reset-btn" onclick="resetTest()">Retake Test ↺</button>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:24px 16px 40px;font-size:12px;color:var(--text-secondary);">
+  Elevate &amp; Educate Academy · RD Exam Prep · Domain 3: Management of Food and Nutrition Services
+</div>
+
+<script>
+const ORDER = ['planning','organizing','staffing','directing','controlling','exam','test'];
+const LABELS = ['📋 Planning','🗂 Organizing','👥 Staffing','🧭 Directing','📊 Controlling','🧠 Exam Decoder','✦ Knowledge Test'];
+const NEXT_COLORS = [
+  'linear-gradient(135deg,#4A90D9,#3370B0)',
+  'linear-gradient(135deg,#2BBFB0,#1A9E91)',
+  'linear-gradient(135deg,#A067D9,#7A45B0)',
+  'linear-gradient(135deg,#3BAD72,#1A7A43)',
+  'linear-gradient(135deg,#2D4A7A,#1E3356)',
+  'linear-gradient(135deg,#E05C8A,#B03070)',
+  'linear-gradient(135deg,#2BBFB0,#2D4A7A)'
+];
+const PILLS = document.querySelectorAll('.nav-pill');
+let currentIdx = 0;
+
+// Test score tracking
+let testScore = 0;
+let testAnswered = 0;
+const TOTAL_Q = 8;
+
+function show(fn) {
+  currentIdx = ORDER.indexOf(fn);
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + fn).classList.add('active');
+  PILLS.forEach(p => p.classList.remove('active'));
+  PILLS[currentIdx].classList.add('active');
+  const pct = Math.round(((currentIdx + 1) / ORDER.length) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent = 'Section ' + (currentIdx + 1) + ' of ' + ORDER.length;
+  updateTopNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateTopNav() {
+  document.getElementById('tnav-section').textContent = LABELS[currentIdx];
+  document.getElementById('tnav-sub').textContent = 'Section ' + (currentIdx + 1) + ' of ' + ORDER.length;
+  const prevBtn = document.getElementById('tnav-prev');
+  const nextBtn = document.getElementById('tnav-next');
+  prevBtn.disabled = currentIdx === 0;
+  if (currentIdx < ORDER.length - 1) {
+    nextBtn.disabled = false;
+    nextBtn.textContent = 'Next: ' + LABELS[currentIdx + 1].replace(/^[^\s]+\s/, '') + ' →';
+    nextBtn.style.background = NEXT_COLORS[currentIdx + 1] || NEXT_COLORS[0];
+  } else {
+    nextBtn.disabled = true;
+    nextBtn.textContent = 'Final Section';
+  }
+}
+
+function navStep(dir) {
+  const newIdx = currentIdx + dir;
+  if (newIdx >= 0 && newIdx < ORDER.length) show(ORDER[newIdx]);
+}
+
+function testAnswer(qid, btn, result, feedback) {
+  const opts = document.querySelectorAll('#' + qid + '-opts .quiz-opt');
+  opts.forEach(o => { o.disabled = true; o.style.opacity = '0.55'; });
+  btn.style.opacity = '1';
+  btn.classList.add(result);
+  const fb = document.getElementById(qid + '-fb');
+  fb.textContent = (result === 'correct' ? '✓ ' : '✗ ') + feedback;
+  fb.className = 'quiz-feedback show ' + result;
+  testAnswered++;
+  if (result === 'correct') testScore++;
+  updateScore();
+  if (testAnswered === TOTAL_Q) showCompletion();
+}
+
+function updateScore() {
+  document.getElementById('score-display').textContent = testScore + ' / ' + TOTAL_Q;
+  const pct = Math.round((testScore / TOTAL_Q) * 100);
+  document.getElementById('score-bar').style.width = Math.round((testAnswered / TOTAL_Q) * 100) + '%';
+  document.getElementById('score-pct').textContent = pct + '% correct so far';
+}
+
+function showCompletion() {
+  const pct = Math.round((testScore / TOTAL_Q) * 100);
+  const banner = document.getElementById('completion-banner');
+  const title = document.getElementById('completion-title');
+  const msg = document.getElementById('completion-msg');
+  if (pct === 100) { title.textContent = '🎉 Perfect Score!'; msg.textContent = 'Outstanding! You answered all 8 questions correctly. You are ready for exam day!'; }
+  else if (pct >= 75) { title.textContent = '✦ Great Work!'; msg.textContent = 'You scored ' + testScore + ' out of 8. Review the functions you missed and try again.'; }
+  else { title.textContent = 'Keep Going!'; msg.textContent = 'You scored ' + testScore + ' out of 8. Go back through the lesson and retake the test.'; }
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetTest() {
+  testScore = 0; testAnswered = 0;
+  document.getElementById('score-display').textContent = '0 / 8';
+  document.getElementById('score-bar').style.width = '0%';
+  document.getElementById('score-pct').textContent = '0% correct so far';
+  document.getElementById('completion-banner').classList.remove('show');
+  for (let i = 1; i <= 8; i++) {
+    const opts = document.querySelectorAll('#t' + i + '-opts .quiz-opt');
+    opts.forEach(o => { o.disabled = false; o.style.opacity = '1'; o.classList.remove('correct','wrong'); });
+    const fb = document.getElementById('t' + i + '-fb');
+    fb.className = 'quiz-feedback'; fb.textContent = '';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateTopNav();
+</script>
+</body>
+</html>
